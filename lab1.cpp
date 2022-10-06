@@ -166,7 +166,6 @@ void Pass2() {
     int modCount = 1; int modBase = 0; 
     input.open(file);
     map<string, int> definitionMap = Symbol_Table; 
-    set<string> program_uselist; 
     if(input.is_open()) {
         while (true)
         {
@@ -383,6 +382,7 @@ bool validSymbol(string s) {
 }
 
 void getToken() {
+    static bool firsttime = false; 
     char *next = strtok(NULL, delimiters);
     if(next == NULL) {
         while(true) {
@@ -410,8 +410,7 @@ void getToken() {
         }
     }
     else {
-        string t = token;
-        int add = t.length();
+        int add = strlen(token);
         token = next; 
         line_offset = line_offset + add +  1;
     }
