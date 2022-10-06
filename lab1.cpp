@@ -117,7 +117,7 @@ void Pass1() {
 
             getToken();
 
-            int useCount = readInt(true);
+            int useCount = readInt();
 
             if(!validCountAndOp(useCount)) return; 
             if(useCount > 16) {
@@ -134,7 +134,7 @@ void Pass1() {
 
             getToken(); 
 
-            int instCount = readInt(true);
+            int instCount = readInt();
             if(instCount + modBase > 512) {
                 __parseerror(6); 
                 return; 
@@ -187,7 +187,7 @@ void Pass2() {
             }
 
             getToken();   
-            int useCount = readInt(true);
+            int useCount = readInt();
 
 
             vector<string> use_list; 
@@ -201,7 +201,7 @@ void Pass2() {
             }
             getToken(); 
 
-            int instCount = readInt(true);
+            int instCount = readInt();
             for(int i = 0; i < instCount; ++i) {  
 
                 getToken();
@@ -262,11 +262,13 @@ void Pass2() {
                 mapOrder++;
             }
             vector<bool>::iterator it; 
+            if(used_flag.empty() == false) {
                 for(it = used_flag.begin(); it != used_flag.end(); ++it) {
                     if(*it == false) {
                         cout << "Warning: Module "<<to_string(modCount)<<": "<<use_list[it-used_flag.begin()]<<" appeared in the uselist but was not actually used\n"; 
-                   }
-            }
+                    }
+                }
+            } 
             modCount++; 
             modBase = modBase + instCount;
         }
@@ -381,9 +383,7 @@ bool validSymbol(string s) {
 }
 
 void getToken() {
-    //char* next = strtok(NULL, delimiters);
-    char* next = NULL;
-    if(!strLine.empty()) next = strtok(NULL, delimiters);
+    char *next = strtok(NULL, delimiters);
     if(next == NULL) {
         while(true) {
             if(input.eof()) {
@@ -473,7 +473,7 @@ bool entryTooLarge(int operand, int size) {
 }
 
 string __instructionerror(int errorcode) {
-    static string ierrstr[] = { "Absolute address exceeds machine size; zero used","Relative address exceeds module size; zero used","External address exceeds length of uselist; treated as immediate","Illegal immediate value; treated as 9999","Illegal opcode; treated as 9999"}; 
+    static string ierrstr[5] = { "Absolute address exceeds machine size; zero used","Relative address exceeds module size; zero used","External address exceeds length of uselist; treated as immediate","Illegal immediate value; treated as 9999","Illegal opcode; treated as 9999"}; 
     return "Error: "+ierrstr[errorcode];
 }
 
