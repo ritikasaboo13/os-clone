@@ -42,7 +42,7 @@ ifstream input;
 int parseErrorFlag = -1; 
 vector<string> errorSymbols;
 int mapOrder = 0;
-set<string> program_uselist;
+//set<string> program_uselist;
 int line_num = 0, line_offset = 0;
 int prevLine = 0;
 int flag = -1;
@@ -73,8 +73,9 @@ int main(int argc, char* argv[]) {
             }
             cout << '\n';
         }
-    
     Pass2();
+    Symbol_Table.clear();
+    errorSymbols.clear();
     input.close();
     }
 }
@@ -153,7 +154,8 @@ void Pass1() {
             }
             checkWarnings(definition_list, instCount, modBase, modCount);
             modCount++; 
-            modBase = modBase + instCount;      
+            modBase = modBase + instCount;
+            definition_list.clear();      
         }
     }
 
@@ -164,6 +166,7 @@ void Pass1() {
 void Pass2() {
     cout << "\nMemory Map\n";
     int modCount = 1; int modBase = 0; 
+    set<string> program_uselist;
     input.open(file);
     map<string, int> definitionMap = Symbol_Table; 
     if(input.is_open()) {
@@ -268,6 +271,8 @@ void Pass2() {
                     }
                 }
             } 
+            used_flag.clear();
+            use_list.clear();
             modCount++; 
             modBase = modBase + instCount;
         }
@@ -282,6 +287,8 @@ void Pass2() {
 
     } 
     input.close();
+    definitionMap.clear();
+    program_uselist.clear();
 }
 
 int readInt(bool optional) { 
@@ -382,8 +389,16 @@ bool validSymbol(string s) {
 }
 
 void getToken() {
-    static bool firsttime = false; 
-    char *next = strtok(NULL, delimiters);
+    static bool firsttime = true; 
+    char *next;
+    
+    if(firsttime) {
+        next = NULL; 
+        firsttime = false; 
+    }
+    else {
+        next = strtok(NULL, delimiters);
+    }
     if(next == NULL) {
         while(true) {
             if(input.eof()) {
