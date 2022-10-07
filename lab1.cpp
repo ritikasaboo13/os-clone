@@ -242,16 +242,17 @@ void Pass2() {
                             }
                             operand = modBase + operand;
                             break;
-                        case 'E': 
-                            used_flag[operand] = true;
+                        case 'E':
                             if(entryTooLarge(operand, use_list.size())) {
                                 message = __instructionerror(2);
+                                break;
                             }
-                            else if(Symbol_Table.find(use_list[operand]) == Symbol_Table.end()) {
+                            used_flag[operand] = true;
+                            if(Symbol_Table.find(use_list[operand]) == Symbol_Table.end()) {
                                 message = "Error: " + use_list[operand] + " is not defined; zero used";
                                 operand = 0;
                             }
-                            else {
+                            else { 
                                 operand = Symbol_Table[use_list[operand]];
                             }
                             break;                         
