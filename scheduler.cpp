@@ -606,6 +606,7 @@ int main(int argc, char** argv) {
 
     printf("SUM: %d %.2lf %.2lf %.2lf %.2lf %.3lf\n", finish_event_time, cpu_util, io_util, avg_tt, avg_cw, throughput);
     randvals.clear();
+    delete(SimulationLayer);
  }
 
 void parseCommand(int argc, char** argv) { 
