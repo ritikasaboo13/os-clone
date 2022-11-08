@@ -532,6 +532,7 @@ int main(int argc, char** argv) {
             p->cw = 0;
             p->it = 0;
             p->premflag = 0;
+            p->remaining_burst = 0;
             e->evtProcess = p;
             e->evtTimeStamp = p->AT;
             e->transition = TRANS_TO_READY; 
@@ -695,9 +696,9 @@ void Simulation() {
                  delete evt;                  
                  evt = nullptr;
 
-                 //cout << CURRENT_TIME << " " << proc->pid << " " << proc->timeInPrevState << ": ";
-                 //cout << proc->p_state << " " << transition; 
-                 //cout << "\n";
+                 cout << CURRENT_TIME << " " << proc->pid << " " << proc->timeInPrevState << ": ";
+                 cout << proc->p_state << " " << transition; 
+                 cout << "\n";
 
                  switch(transition) {  
                     case TRANS_TO_READY: 
@@ -745,11 +746,11 @@ void Simulation() {
                         proc->cb = proc->cb - min(quant, proc->timeInPrevState);
 
                         
-                        /*cout << " cb= " << proc->cb << " "; 
+                        cout << " cb= " << proc->cb << " "; 
                         cout << "rem= " << proc->cb_rem << " ";
                         cout << "prio= " << proc->dynamic_prio << " "; 
                         cout << "quant= " << quant; 
-                        cout << "\n";*/
+                        cout << "\n";
                         break;
 
                     case TRANS_TO_RUN:
@@ -763,11 +764,11 @@ void Simulation() {
                         
                         proc->cb = min(proc->cb_rem, proc->cb);
                         
-                        //cout << " cb= " << proc->cb << " "; 
-                        //cout << "rem= " << proc->cb_rem << " ";
-                        //cout << "prio= " << proc->dynamic_prio; 
-                        //cout << "quant= " << quant; 
-                        //cout << "\n";
+                        cout << " cb= " << proc->cb << " "; 
+                        cout << "rem= " << proc->cb_rem << " ";
+                        cout << "prio= " << proc->dynamic_prio; 
+                        cout << "quant= " << quant; 
+                        cout << "\n";
 
                         if(proc->cb > quant) {
                             proc->remaining_burst = proc->cb - quant; 
@@ -807,9 +808,9 @@ void Simulation() {
                         new_event->evtProcess = proc;
                         //proc->cb -= proc->timeInPrevState;
                         proc->ib = myrandom(proc->IO);   
-                        //cout << " ib= " << proc->ib << " "; 
-                        //cout << "rem= " << proc->cb_rem << " ";
-                        //cout << "\n"; 
+                        cout << " ib= " << proc->ib << " "; 
+                        cout << "rem= " << proc->cb_rem << " ";
+                        cout << "\n"; 
                         new_event->transition = TRANS_TO_READY;
                         new_event->evtTimeStamp = CURRENT_TIME + proc->ib;
                         proc->p_state = BLOCKED;    
@@ -855,3 +856,4 @@ void Simulation() {
                  new_event = nullptr;
          }
 }
+
