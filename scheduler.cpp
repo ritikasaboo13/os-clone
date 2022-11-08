@@ -14,7 +14,7 @@
 using namespace std;
 
 enum state {CREATED, READY, RUNNING, BLOCKED, COMPLETE};
-enum transition {TRANS_TO_READY, TRANS_TO_PREEMPT, TRANS_TO_RUN, TRANS_TO_BLOCK, TRANS_TO_COMPLETE};
+enum trans {TRANS_TO_READY, TRANS_TO_PREEMPT, TRANS_TO_RUN, TRANS_TO_BLOCK, TRANS_TO_COMPLETE};
 
 // Classes
 class Process; 
@@ -123,7 +123,7 @@ class Event {
         int eid;  
         int evtTimeStamp; 
         Process *evtProcess; 
-        transition transition;
+        trans transition;
 
         //void Event(int ts, Process* p, int t, state old_state, state new_state) {
                // this->evtTimeStamp = ts;
@@ -683,7 +683,7 @@ void Simulation() {
                  Event* new_event;
                  Process *proc = evt->evtProcess;  
                  CURRENT_TIME = evt->evtTimeStamp;
-                 transition transition = evt->transition;
+                 trans transition = evt->transition;
                  proc->timeInPrevState = CURRENT_TIME-proc->state_ts;
                  proc->state_ts = evt->evtTimeStamp;
                  //cout << "---------"<< endl; 
