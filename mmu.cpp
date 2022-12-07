@@ -11,6 +11,7 @@
 #include <vector>
 #include <set>
 #include <limits>
+#include <climits>
 
 // remember vma is dynamically allocated 
 
