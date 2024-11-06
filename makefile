@@ -1,4 +1,5 @@
-scheduler: io.cpp
-	g++ -g -w io.cpp -o io # I always compile with -g to enable debugging
+scheduler: mmu.cpp
+	g++ -g -w mmu.cpp -o mmu # I always compile with -g to enable debugging
 clean:
-	rm -f io *~
+	rm -f mmu *~
+
