@@ -20,58 +20,11 @@ The repository is organized as follows:
    ```bash
    git clone https://github.com/yourusername/os-clone.git
    cd os-clone
-Build Each Module
+
+## Build Each Module
 
 Each module has its own makefile. You can compile individual modules by navigating to their respective directories and running:
 
-bash
-Copy code
-cd module-directory
-make
-For example, to build the process-scheduler module, run:
-
-bash
-Copy code
-cd process-scheduler
-make
-Run the Programs
-
-After building, you can run each module's program(s) using the provided scripts or executables. Each directory typically contains a runit.sh script for easy execution.
-
-Modules
-1. Process Scheduler (process-scheduler/)
-Simulates various process scheduling algorithms:
-
-Round Robin
-First-Come-First-Serve (FCFS)
-Priority Scheduling
-To Run: Use the scheduler.cpp file or runit.sh script to execute the scheduling simulations.
-
-2. I/O Scheduler (io-scheduler/)
-Includes several I/O scheduling algorithms:
-
-First-Come-First-Serve (FCFS)
-Shortest Seek Time First (SSTF)
-SCAN and C-SCAN
-To Run: Run the io.cpp file or use the runit.sh script.
-
-3. Linker (linker/)
-Emulates linking and loading functionalities, useful for understanding basic linker operations.
-
-To Run: Compile with make and then execute the resulting binary.
-
-4. Memory Management Unit (mmu/)
-This module simulates a memory management unit, covering:
-
-Page Replacement Algorithms (e.g., FIFO, LRU)
-Memory Allocation Techniques
-To Run: Use the makefile to compile the program and test with provided input files.
-
-Usage Example
-Here’s an example of how to compile and run the process-scheduler module:
-
-bash
-Copy code
-cd process-scheduler
-make
-./scheduler  # or use ./runit.sh if provided
+   ```bash
+   cd module-directory
+   make
