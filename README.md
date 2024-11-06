@@ -1,5 +1,3 @@
-# os-clone
-
 # OS-Clone
 
 This repository, **OS-Clone**, contains various modules that simulate essential functionalities of an operating system. Each module is organized in a dedicated subdirectory, covering areas such as process scheduling, I/O scheduling, memory management, and linking.
